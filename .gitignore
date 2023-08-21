@@ -1,0 +1,5 @@
+.env
+.env-gmail
+.venv
+.venv/*
+.venv/*.*
