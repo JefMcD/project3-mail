@@ -1,37 +1,151 @@
 {% extends "mail/layout.html" %}
 {% load static %}
-
 {% block body %}
-    <h2>{{ request.user.email }}</h2>
 
-    <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button>
-    <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
-    <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button>
-    <button class="btn btn-sm btn-outline-primary" id="archived">Archived</button>
-    <a class="btn btn-sm btn-outline-primary" href="{% url 'logout' %}">Log Out</a>
-    <hr>
 
-    <div id="emails-view">
+    <div class='app-container'>
+
+
+        <div class='mail-client-header'>
+
+            <div class='btns-section'>
+
+                <div class="standard-btn tab active-tab"    id="inbox">Inbox</div>
+                <div class="standard-btn tab "              id="compose">Compose</div>
+                <div class="standard-btn tab "              id="sent">Sent</div>
+                <div class="standard-btn tab "              id="archive">Archived</div>
+
+            </div>
+
+            <div class='user-section'>
+                <div class='username-wrapper'>
+                    <h2>{{ request.user.email }}</h2>
+                </div>
+                <div class='logout-btn-wrapper'>
+                    <a class="logout-btn" href="{% url 'logout' %}">
+                        <img src="{% static 'mail/img/logout-red.svg' %}">
+                    </a>
+                </div>
+            </div>
+   
+        </div>
+
+
+
+        <div class='mail-client-body'>
+
+            <div id="emails-view">
+
+                <div class='mailbox-wrapper'>
+                    <div class = 'mailbox-title'>
+                        <div class='email-list-name'>
+                            <!-- Contents loaded by Javascript-->
+                        </div>
+                        <div class = 'refresh-icon'>
+                            <img src="{% static 'mail/img/refresh.svg' %}">
+                        </div>
+            
+                    </div>
+                    <div class = 'emails-list-wrapper'> 
+
+
+                    </div>
+
+                </div>
+
+
+
+                
+                <div class='read-email-wrapper' data-message-loaded='false'>
+                    <div class = 'jmc-splash-wrapper'>
+                        <img class='jmc-splash-image' src="{% static 'mail/img/jmc.svg' %}">
+                    </div>
+
+                    <div class='email-msg-block'>
+                        <div class='email-msg-ctrlbar-flexbox'>
+                            <div class='msg-btns'>
+                                <div class='standard-btn reply-btn'>
+                                    Reply
+                                </div>
+
+                                <div class='standard-btn archive-btn'>
+                                    Archive                                
+                                </div>
+
+                                <div class='standard-btn unarchive-btn'>
+                                    Unarchive                                
+                                </div>
+                            </div>
+                            <div class='msg-icons'>
+                                <div class='msg-icon maximize-icon'>
+                                    <img src="{% static 'mail/img/maximize.png' %}">
+                                </div>
+    
+                                <div class='msg-icon minimize-icon'>
+                                    <img src="{% static 'mail/img/minimize.png' %}">
+                                </div>
+                                <div class='msg-icon close-icon'>
+                                    <img src="{% static 'mail/img/close.png' %}">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class = 'email-message-body'>
+                        
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+
+
+            <div id="compose-view">
+                <div class='compose-view-title'>
+                    <h3>New Email</h3>
+                </div>
+                <form id="compose-form" action='#'>
+                    {% csrf_token %}
+                    <div class='compose-form-addresses'>
+                        From: 
+                        <input name='sender' disabled class="compose-input" value="{{ request.user.email }}">
+                        To: 
+                        <input name='recipients' id="compose-recipients" class="compose-input">
+                    </div>
+
+                    <div class='compose-form-message'>
+
+                        <input name='subject' class="compose-input subject" id="compose-subject" placeholder="Subject">
+                        <textarea name='body' class="compose-textarea" id="compose-body" placeholder="Body"></textarea>
+
+                    </div>
+                    <button id='compose-submit' type="submit">
+                        <img src="{% static 'mail/img/send-red.svg' %}">
+                    </button>
+                    
+ 
+                        
+                </form>
+
+
+
+            </div>
+        </div>
+        
+ 
+        <div id='UI-messages'>
+
+        </div>
+ 
+
     </div>
 
-    <div id="compose-view">
-        <h3>New Email</h3>
-        <form id="compose-form">
-            <div class="form-group">
-                From: <input disabled class="form-control" value="{{ request.user.email }}">
-            </div>
-            <div class="form-group">
-                To: <input id="compose-recipients" class="form-control">
-            </div>
-            <div class="form-group">
-                <input class="form-control" id="compose-subject" placeholder="Subject">
-            </div>
-            <textarea class="form-control" id="compose-body" placeholder="Body"></textarea>
-            <input type="submit" class="btn btn-primary"/>
-        </form>
-    </div>
 {% endblock %}
 
 {% block script %}
-    <script src="{% static 'mail/inbox.js' %}"></script>
+    <script src="{% static 'mail/inbox.js' %}?v1.001"></script>
 {% endblock %}

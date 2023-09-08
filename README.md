@@ -1,5 +1,8 @@
 # CS50 Project-3 : Mail
 
+# Overview
+A mail app with backend and API written using Python/Django, with the Front end developed using SASS/CSS and Javascript
+
 ## Pre-requisites
 1. python virtual environment (Python3 v3.10.x)
 2. django
@@ -9,13 +12,10 @@
 1. Whitenoise
 
 ## Helpful for Development and Testing
-1. Django Debugger
+1. Django Debug Toolbar
 
 
-# Overview
-A mail app written using Python/Django, with the Front end developed using SASS/CSS and Javascript/Vue
 
-I chose the Vue framework to handle the front end javascript over React because Vue is open source and not proptietory. 
 
 
 

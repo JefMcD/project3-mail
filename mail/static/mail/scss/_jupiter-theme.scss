@@ -1,0 +1,77 @@
+$white-001: #fff;
+$grey-001: #eeeeee;
+$grey-002: #e0e0e0;
+$grey-003: #acabab;
+$grey-004: #8d8d8d;
+$grey-005: #494949;
+$black-001: #000;
+
+$lt-001: #fbf3fc;
+$lt-002: #fbe0fc;
+$lt-003: #f9d8fa;
+
+$dk-001: #a10000;
+$dk-002: #720000;
+$dk-003: #3a0000;
+
+$blu-001:  #cdc8f8;
+$blu-002:  #6b52fc;
+$blu-003:  #1200b3;
+
+$orange-001: #fffbea;
+$orange-002: #fff3e0;
+$orange-003: #ff9e78;
+
+$purple-001: #b300aa;
+$purple-002: #52004e;
+$purple-003: #170018;
+
+$red-001: #db0079;
+$red-002: #c70d00;
+$red-003: #860053;
+
+$green-001: #d1e794; 
+$green-002: #93c900; 
+$green-003: #329e00; 
+
+$accent-001: #06747c;
+
+$yellow-001: #ffdd1d;
+$yellow-002: #302500;
+
+
+$semi-opaque-001: rgba(0,0,0,0.10);
+$semi-opaque-002: rgba(0,0,0,0.20);
+$semi-opaque-003: rgba(0,0,0,0.30);
+
+$semi-opaque-004: rgba(255, 253, 253, 0.10);
+$semi-opaque-005: rgba(255, 255, 255, 0.20);
+$semi-opaque-006: rgba(255, 255, 255, 0.30);
+
+$nav-offset: 7rem;
+
+
+
+// https://www.w3schools.com/cssref/css3_pr_filter.php
+$orange-filter: hue-rotate(80deg) brightness(50%) contrast(10%) sepia(200%) saturate(2476%);
+$lt-orange-filter: hue-rotate(80deg) brightness(200%) contrast(0%) sepia(200%) saturate(1500%);
+$green-filter: invert(48%) sepia(79%) saturate(1476%) hue-rotate(86deg) brightness(58%) contrast(119%);
+
+$sepia-filter:  sepia(100%)  brightness(75%);
+$sepia-filter-off: sepia(0%) brightness(100%);
+
+$blur: blur(1px);
+
+$svg-orange: hue-rotate(80deg) brightness(200%) contrast(0%) sepia(200%) saturate(1500%);
+$svg-pink: hue-rotate(80deg) brightness(200%) contrast(0%) sepia(200%) saturate(1500%);
+
+
+::-moz-selection { /* Code for Firefox */
+    color:$lt-001;
+    background: $dk-001;
+  }
+  
+  ::selection {
+    color:$lt-001;
+    background: $dk-001;
+  }

@@ -24,18 +24,20 @@ def index(request):
 @csrf_exempt
 @login_required
 def compose(request):
-
+    print('######## compose #########')
     # Composing a new email must be via POST
     if request.method != "POST":
+        # ie request.method === 'GET' | 'PUT' | 'DELETE'
         return JsonResponse({"error": "POST request required."}, status=400)
 
+    # request.method === 'POST'
     # Check recipient emails
     data = json.loads(request.body)
+    print(f"data => {data}")
     emails = [email.strip() for email in data.get("recipients").split(",")]
     if emails == [""]:
-        return JsonResponse({
-            "error": "At least one recipient required."
-        }, status=400)
+        return JsonResponse({"error": "At least one recipient required."}, 
+                            status=400)
 
     # Convert email addresses to users
     recipients = []
@@ -44,9 +46,8 @@ def compose(request):
             user = User.objects.get(email=email)
             recipients.append(user)
         except User.DoesNotExist:
-            return JsonResponse({
-                "error": f"User with email {email} does not exist."
-            }, status=400)
+            return JsonResponse({"error": f"User with email {email} does not exist."}, 
+                                status=400)
 
     # Get contents of email
     subject = data.get("subject", "")
@@ -96,9 +97,21 @@ def mailbox(request, mailbox):
     return JsonResponse([email.serialize() for email in emails], safe=False)
 
 
+
+@login_required
+def emails_fake(request):
+    # https://docs.djangoproject.com/en/4.2/ref/request-response/#jsonresponse-objects
+    mailbox = ''
+    return JsonResponse({"subject": "Json Object",
+                         "recipient": "turkle@fren.com",
+                         "body": "A dictionary object sent as a JsonResponse"})
+
+
+
+
 @csrf_exempt
 @login_required
-def email(request, email_id):
+def email(request, email_id=0):
 
     # Query for requested email
     try:
@@ -177,3 +190,39 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "mail/register.html")
+    
+    
+    
+    
+    
+    
+@csrf_exempt
+@login_required
+def email_test(request, email_id=0):
+
+    # Query for requested email
+    try:
+        email = Email.objects.get(user=request.user, pk=email_id)
+    except Email.DoesNotExist:
+        return JsonResponse({"error": "Email not found."}, status=404)
+
+    # Return email contents
+    if request.method == "GET":
+        return JsonResponse(email.serialize())
+
+    # Update whether email is read or should be archived
+    elif request.method == "PUT":
+        data = json.loads(request.body)
+        if data.get("read") is not None:
+            email.read = data["read"]
+        if data.get("archived") is not None:
+            email.archived = data["archived"]
+        email.save()
+        return HttpResponse(status=204)
+
+    # Email must be via GET or PUT
+    else:
+        return JsonResponse({
+            "error": "GET or PUT request required."
+        }, status=400)
+

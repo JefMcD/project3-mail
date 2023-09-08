@@ -2,6 +2,8 @@ from django.urls import path
 
 from . import views
 
+
+#app_name = 'mailclient'
 urlpatterns = [
     path("", views.index, name="index"),
     path("login", views.login_view, name="login"),
@@ -12,4 +14,6 @@ urlpatterns = [
     path("emails", views.compose, name="compose"),
     path("emails/<int:email_id>", views.email, name="email"),
     path("emails/<str:mailbox>", views.mailbox, name="mailbox"),
+    
+    path("emails_fake", views.emails_fake, name="emails_fake"),
 ]

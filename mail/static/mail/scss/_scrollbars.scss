@@ -1,0 +1,26 @@
+@use 'jupiter-theme';
+
+/* Scrollbars */
+/* Works on Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: jupiter-theme.$dk-001 jupiter-theme.$lt-001;
+  }
+  
+  /* Works on Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    background:jupiter-theme.$lt-001;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background-color: jupiter-theme.$dk-001;
+    border-radius: 20px;
+    border: 3px solid jupiter-theme.$lt-001;
+  }
+  /* end scrollbars */
+  
+

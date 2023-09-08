@@ -1,11 +1,12 @@
 
-# Setup Python Virtual Environment
+# Setup & Install on Ubuntu 22.04.2
 
-## Ubuntu 22.04.02  
-Install virtual environment in folder .venv in the project root folder  
+## Setup Python Virtual Environment
+
+Install virtual environment in folder .venv in the project folder  
 
 ```
-$ cd /Project-Root  
+$ cd /Project-3
 $ python3 -m venv .venv
 ```
 add .venv and .venv/\*.* to .gitignore
@@ -28,9 +29,42 @@ $ source .venv/bin/activate
 ## Creating Django Project and App
 
 ```
-(.venv)$ cd /Project-Root-Folder/
-(.venv)$ django-admin startproject Project3 .
+(.venv)$ cd .../Project-3/
+(.venv)$ django-admin startproject Project3
+(.venv)$ cd Project3
 (.venv)$ python3 manage.py startapp mail 
+```
+
+## Configure DEFAULT_AUTO_FIELD
+
+Open Apps.py  
+Edit the AppConfig thusly
+```
+from django.apps import AppConfig
+
+class MailConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'mail'
+```
+or open settings.py and define it thusly
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+```
+
+## Make Migrations
+
+Always include the app name when making migrations
+
+```
+(.venv)$ python3 manage.py makemigrations mail
+(.venv)$ python3 manage.py migrate
+(.venv)$ python3 manage.py runserver
 ```
 
 # Install Django Debug Toolbar
@@ -81,6 +115,9 @@ if settings.DEBUG:
        # ...
    ] + urlpatterns
 ```
+
+
+# Live Mail Servers
 
 
 

@@ -1,0 +1,51 @@
+@use 'fonts';
+@use 'jupiter-theme';
+
+.standard-btn{
+    width: 6rem;
+    height: 2rem;
+    padding: 0.2rem;
+    padding-top: 0.4rem;
+    margin-right: 0.2rem;
+    text-align: center;
+    //border: 1px solid jupiter-theme.$lt-003;
+
+    border-radius: 0.2rem;
+
+    color: jupiter-theme.$lt-001;
+    background-color: jupiter-theme.$dk-001;
+
+    font-family: fonts.$eras-stack;
+    font-size: 12pt;
+
+    z-index: 2;
+
+    transition-property: background-color;
+    transition-duration: 150ms;
+    transition-timing-function: ease-in;
+}
+
+.tab{
+    border-top-left-radius: 50%;
+    border-top-right-radius: 0.3rem;
+}
+.active-tab{
+    background-color: jupiter-theme.$white-001;
+    color: jupiter-theme.$dk-002;
+
+}
+
+.standard-btn:hover,
+.standard-btn:active,
+.standard-btn:focus{
+    color: jupiter-theme.$lt-001;
+    background-color: jupiter-theme.$dk-002;
+}
+
+.standard-btn.active-tab:hover,
+.standard-btn.active-tab:active,
+.standard-btn.active-tab:focus{
+    background-color: jupiter-theme.$white-001;
+    color: jupiter-theme.$dk-002;
+}
+
